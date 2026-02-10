@@ -387,7 +387,7 @@ class MiroExporter {
         let item;
         if (card.type === 'decision') {
           item = await this.createDecisionNode(
-            card.content,
+            card.title,
             card.x,
             card.y,
             card.width,
@@ -395,7 +395,7 @@ class MiroExporter {
           );
         } else {
           item = await this.createTaskCard(
-            card.content,
+            card.title,
             card.x,
             card.y,
             card.width,
