@@ -143,7 +143,7 @@ y = Math.round(値 / 50) * 50
 | 種類 | 形状 | 色 | 線種 | 接続位置 |
 |------|------|-----|------|---------|
 | 通常フロー | elbowed | #4169e1（青） | normal | right→left or bottom→top |
-| 差し戻し | curved | #e74c3c（赤） | dashed | left→left |
+| 差し戻し | curved | #e74c3c（赤） | dashed | bottom→bottom |
 
 ### ④ タイムライン: 左から右
 

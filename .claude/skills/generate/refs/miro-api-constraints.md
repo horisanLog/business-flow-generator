@@ -32,7 +32,7 @@
 ```
 判定ロジック（siblingIndex = 同一ノードからの何本目のフォワードコネクタか）:
   if 差し戻し:
-    snapFrom='left', snapTo='left'  （カーブで迂回するため両方左）
+    snapFrom='bottom', snapTo='bottom'  （カーブで下方向にU字弧を描く）
   else if 同一スイムレーン:
     if siblingIndex == 0:
       snapFrom='right', snapTo='left'  （右から出て左に入る＝水平フロー）

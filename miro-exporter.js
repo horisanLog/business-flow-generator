@@ -285,7 +285,7 @@ class MiroExporter {
    */
   determineSnap(fromInfo, toInfo, isBackward, siblingIndex = 0) {
     if (isBackward) {
-      return { snapFrom: 'left', snapTo: 'left' };
+      return { snapFrom: 'bottom', snapTo: 'bottom' };
     }
 
     // 同一ノードから複数のフォワードコネクタがある場合、snapToを分散
@@ -503,8 +503,17 @@ class MiroExporter {
       }
     }
 
-    // 6. シェイプを前面に出す（コネクタの上にシェイプを表示するため）
-    console.log('\n🔝 シェイプを前面に移動中...');
+    // 6. スイムレーンを背面に送る（コネクタが隠れないようにする）
+    console.log('\n🔝 z-order調整中...');
+    for (const swimlane of flowData.swimlanes) {
+      const frameId = itemIds[`swimlane_${swimlane.name}`];
+      if (frameId) {
+        await this.sendFrameToBack(frameId, swCenterX, swimlane.y_position || 0, swimlane.height || 350);
+        await this.sleep(100);
+      }
+    }
+
+    // 7. シェイプを前面に出す（コネクタの上にシェイプを表示するため）
     for (const swimlane of flowData.swimlanes) {
       for (const card of swimlane.cards || []) {
         const miroId = itemIds[card.id];
@@ -531,6 +540,21 @@ class MiroExporter {
 
     console.log('\n✅ エクスポート完了！\n');
     console.log(`🔗 Miroボード: https://miro.com/app/board/${this.boardId}/`);
+  }
+
+  /**
+   * フレームの位置を再更新してz-orderを背面にする（最初に更新＝最背面）
+   */
+  async sendFrameToBack(frameId, centerX, yPos, height) {
+    try {
+      await this.makeRequest(
+        'PATCH',
+        `/v2/boards/${this.boardId}/frames/${frameId}`,
+        { position: { x: centerX, y: yPos + Math.floor(height / 2), origin: 'center' } }
+      );
+    } catch (error) {
+      // z-order更新の失敗は無視
+    }
   }
 
   /**
