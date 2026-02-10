@@ -60,6 +60,57 @@ output.json をMiroにエクスポートして
 
 ## セットアップ
 
+### 0. 前提条件
+
+<details>
+<summary>Node.js のインストール（未導入の場合）</summary>
+
+Node.js v14以上が必要です。
+
+**macOS（Homebrew）:**
+```bash
+brew install node
+```
+
+**Windows（公式インストーラー）:**
+
+[Node.js公式サイト](https://nodejs.org/) からLTS版をダウンロードしてインストール。
+
+**バージョン確認:**
+```bash
+node -v
+npm -v
+```
+
+</details>
+
+<details>
+<summary>Python のインストール（Python版エクスポーターを使う場合）</summary>
+
+Python 3.8以上が必要です。Node.js版エクスポーターのみ使う場合は不要です。
+
+**macOS（Homebrew）:**
+```bash
+brew install python
+```
+
+**Windows（公式インストーラー）:**
+
+[Python公式サイト](https://www.python.org/) からダウンロードしてインストール。
+
+**バージョン確認:**
+```bash
+python3 --version
+pip3 --version
+```
+
+**依存パッケージ:**
+```bash
+pip3 install -r requirements.txt
+```
+
+</details>
+
 ### 1. リポジトリのクローン
 
 ```bash
