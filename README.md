@@ -2,7 +2,81 @@
 
 業務ヒアリング議事録から業務フロー図を自動生成し、Miroボードにエクスポートするツールです。
 
-Claude CodeのSkillとして動作し、議事録の分析からMiro出力までを一貫して行います。
+Claude CodeのSkillとして動作し、**自然言語の指示だけ**で議事録の分析からMiro出力までを一貫して行います。コマンドを覚える必要はありません。
+
+## 使い方
+
+### 基本：指示するだけ
+
+Claude Codeでこのプロジェクトを開き、自然言語で指示するだけです。
+
+```
+この議事録から業務フローを作成して、Miroに出力してください
+```
+
+Claude Codeが自動的に以下を実行します：
+
+1. 議事録を分析し、アクター・プロセス・ドキュメント・システムを抽出
+2. 8品質ポイントに準拠したMiro用JSONを生成
+3. `flow-validator.js` で品質検証（7/7合格を確認）
+4. `miro-exporter.js` でMiroボードにエクスポート
+
+### 指示の例
+
+```
+# 議事録ファイルを指定して生成
+この議事録から業務フローを生成してMiroに出力して: meeting-notes.md
+
+# 議事録がない場合、テキストを直接貼り付け
+以下の内容から業務フローを作成してMiroに出力してください:
+[議事録の内容をここに貼り付け]
+
+# 検証だけ実行
+output.json の品質を検証して
+
+# Miroエクスポートだけ実行
+output.json をMiroにエクスポートして
+```
+
+すべて自然言語で指示するだけで、Claude Codeが適切なツールを選択して実行します。
+
+## セットアップ
+
+### 1. リポジトリのクローン
+
+```bash
+git clone https://github.com/horisanLog/business-flow-generator.git
+cd business-flow-generator
+```
+
+### 2. 依存パッケージのインストール
+
+```bash
+npm install
+```
+
+### 3. Miro API設定
+
+[Miro Developer Portal](https://developers.miro.com/) でアプリを作成し、アクセストークンを取得します。
+
+```bash
+cp .env.example .env
+```
+
+`.env` にトークンとボードIDを設定：
+
+```
+MIRO_ACCESS_TOKEN=your_token_here
+MIRO_BOARD_ID=your_board_id_here
+```
+
+### 4. Claude Codeで開く
+
+```bash
+claude
+```
+
+あとは自然言語で指示するだけです。
 
 ## 構成
 
@@ -18,75 +92,6 @@ business-flow-generator/
 └── requirements.txt      # Python依存パッケージ
 ```
 
-## セットアップ
-
-### 1. Miro API設定
-
-[Miro Developer Portal](https://developers.miro.com/) でアプリを作成し、アクセストークンを取得します。
-
-```bash
-cp .env.example .env
-```
-
-`.env` にトークンとボードIDを設定：
-
-```
-MIRO_ACCESS_TOKEN=your_token_here
-MIRO_BOARD_ID=your_board_id_here
-```
-
-### 2. 依存パッケージのインストール
-
-```bash
-# Node.js版
-npm install
-
-# Python版
-pip install -r requirements.txt
-```
-
-## 使い方
-
-### ステップ1: Skillを呼び出してJSONを生成
-
-Claude Codeで直接Skillを呼び出します：
-
-```
-/business-flow-generator 議事録.md
-```
-
-または会話で依頼：
-
-```
-この議事録から業務フローを生成してください: [議事録ファイルパス]
-```
-
-### ステップ2: 品質検証
-
-```bash
-node flow-validator.js output.json
-```
-
-8つの品質ポイントに基づく7項目の検証を実施：
-
-- 座標計算ルール（50pxグリッド整列）
-- 接続点の重複禁止
-- 差戻し構造配置
-- タイムライン位置関係
-- システム色分け
-- 実行順序明確化
-- レイヤー構造管理
-
-### ステップ3: Miroにエクスポート
-
-```bash
-# Node.js版
-node miro-exporter.js output.json
-
-# Python版
-python miro_exporter.py output.json
-```
-
 ## 出力仕様
 
 ### スイムレーン形式
@@ -99,9 +104,10 @@ python miro_exporter.py output.json
 - 差し戻し: 赤点線（curved）
 - キーワード自動判定: 差し戻し / 不可 / 不合格 / 却下
 
-### z-order管理
-- コネクタ作成後に全シェイプをPATCHして前面に移動
-- 矢印がカードの背面に表示される
+### 品質保証
+- 8つの品質ポイントに完全準拠したJSON生成
+- `flow-validator.js` による7項目の自動検証
+- コネクタ作成後の全シェイプPATCHによるz-order管理
 
 ## Skill定義
 
