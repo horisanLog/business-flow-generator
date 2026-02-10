@@ -4,6 +4,13 @@
 
 Claude CodeのSkillとして動作し、**自然言語の指示だけ**で業務情報の分析からMiro出力までを一貫して行います。コマンドを覚える必要はありません。
 
+
+
+
+https://github.com/user-attachments/assets/226c5fd9-6122-4698-9bb4-b20fae567010
+
+
+
 ## 使い方
 
 ### 基本：指示するだけ
