@@ -151,14 +151,21 @@ claude
 
 ```
 business-flow-generator/
-├── .claude/skills/generate/
-│   └── SKILL.md          # Claude Code Skill定義（8品質ポイント準拠）
-├── miro-exporter.js      # Miroエクスポーター（Node.js）
-├── miro_exporter.py      # Miroエクスポーター（Python）
-├── flow-validator.js     # 品質検証ツール（7項目チェック）
-├── .env.example          # 環境変数テンプレート
-├── package.json          # Node.js依存パッケージ
-└── requirements.txt      # Python依存パッケージ
+├── .claude/
+│   ├── CLAUDE.md                  # プロジェクト全体規約
+│   └── skills/generate/
+│       ├── SKILL.md               # Skill定義（8品質ポイント準拠）
+│       └── refs/                  # 詳細リファレンス（必要時のみ読み込み）
+│           ├── miro-json-spec.md
+│           ├── miro-api-constraints.md
+│           ├── json-sample.md
+│           └── common-mistakes.md
+├── miro-exporter.js               # Miroエクスポーター（Node.js）
+├── miro_exporter.py               # Miroエクスポーター（Python）
+├── flow-validator.js              # 品質検証ツール（7項目チェック）
+├── .env.example                   # 環境変数テンプレート
+├── package.json                   # Node.js依存パッケージ
+└── requirements.txt               # Python依存パッケージ
 ```
 
 ## 出力仕様
@@ -180,13 +187,9 @@ business-flow-generator/
 
 ## Skill定義
 
-`.claude/skills/generate/SKILL.md` にClaude Codeが業務情報を分析してMiro用JSONを生成するための全ルールが定義されています：
+`.claude/skills/generate/SKILL.md` にClaude Codeが業務情報を分析してMiro用JSONを生成するための全ルールが定義されています。
 
-- 議事録分析の手順（Phase 1-4）
-- 8つの品質ポイントの詳細
-- Miro出力用JSON仕様
-- Miro API制約と注意事項
-- よくある間違い12パターン
+詳細なリファレンス（JSON仕様、API制約、よくある間違い等）は `refs/` ディレクトリに分離されており、必要時のみ読み込まれるためコンテキストを効率的に使用します。
 
 ## ライセンス
 
