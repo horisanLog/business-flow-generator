@@ -1,6 +1,6 @@
 ---
-name: business-flow-generator
-description: 業務ヒアリング議事録から高品質な業務フロー図を自動生成し、Miroへエクスポート
+name: generate
+description: あらゆる業務情報から高品質な業務フロー図を自動生成し、Miroへエクスポート
 user-invocable: true
 argument-hint: "[議事録ファイルパス]"
 allowed-tools: Read, Grep, Glob, Write, Bash(node *)

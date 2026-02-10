@@ -100,7 +100,7 @@ claude
 
 ```
 business-flow-generator/
-├── .claude/skills/business-flow-generator/
+├── .claude/skills/generate/
 │   └── SKILL.md          # Claude Code Skill定義（8品質ポイント準拠）
 ├── miro-exporter.js      # Miroエクスポーター（Node.js）
 ├── miro_exporter.py      # Miroエクスポーター（Python）
@@ -129,7 +129,7 @@ business-flow-generator/
 
 ## Skill定義
 
-`.claude/skills/business-flow-generator/SKILL.md` にClaude Codeが業務情報を分析してMiro用JSONを生成するための全ルールが定義されています：
+`.claude/skills/generate/SKILL.md` にClaude Codeが業務情報を分析してMiro用JSONを生成するための全ルールが定義されています：
 
 - 議事録分析の手順（Phase 1-4）
 - 8つの品質ポイントの詳細
