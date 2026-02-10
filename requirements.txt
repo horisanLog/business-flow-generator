@@ -1,0 +1,10 @@
+# Business Flow Generator - Python Dependencies
+
+# HTTP Requests
+requests>=2.31.0
+
+# Environment Variables
+python-dotenv>=1.0.0
+
+# JSON Processing (built-in)
+# json (標準ライブラリ)

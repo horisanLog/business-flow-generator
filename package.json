@@ -1,0 +1,25 @@
+{
+  "name": "business-flow-generator",
+  "version": "2.0.0",
+  "description": "業務フロー自動生成ツール - 議事録からMiroボードを生成",
+  "main": "miro-exporter.js",
+  "scripts": {
+    "export": "node miro-exporter.js",
+    "validate": "node flow-validator.js"
+  },
+  "keywords": [
+    "business-flow",
+    "miro",
+    "workflow",
+    "automation",
+    "claude-code"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.4.5"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
