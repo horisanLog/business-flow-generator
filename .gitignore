@@ -35,6 +35,7 @@ Thumbs.db
 
 # Output Files
 output/
+output_*.json
 *.log
 
 # Temporary Files

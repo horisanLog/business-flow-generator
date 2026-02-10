@@ -22,7 +22,7 @@
         {
           "id": "card_1",
           "type": "task",
-          "content": "顧客要望収集",
+          "title": "顧客要望収集",
           "x": 200,
           "y": 150,
           "width": 220,
@@ -32,7 +32,7 @@
         {
           "id": "card_2",
           "type": "task",
-          "content": "企画部へ提出",
+          "title": "企画部へ提出",
           "x": 550,
           "y": 150,
           "width": 220,
@@ -49,7 +49,7 @@
         {
           "id": "card_3",
           "type": "task",
-          "content": "企画書作成",
+          "title": "企画書作成",
           "x": 900,
           "y": 550,
           "width": 220,
