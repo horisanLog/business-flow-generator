@@ -1,0 +1,128 @@
+{
+  "業務名": "経費精算プロセス",
+  "layout": {
+    "swimlane_width": 4500,
+    "swimlane_center_x": 2250
+  },
+  "swimlanes": [
+    {
+      "name": "申請者（営業部）",
+      "y_position": 0,
+      "height": 300,
+      "cards": [
+        {
+          "id": "card_1",
+          "type": "task",
+          "content": "経費発生・\n領収書収集",
+          "x": 200,
+          "y": 150,
+          "width": 220,
+          "height": 120,
+          "metadata": { "duration": "15〜30分", "documents": ["領収書"], "systems": ["Excel"] }
+        },
+        {
+          "id": "card_2",
+          "type": "task",
+          "content": "経費精算申請",
+          "x": 550,
+          "y": 150,
+          "width": 220,
+          "height": 120,
+          "metadata": { "duration": "15〜30分", "documents": ["経費精算申請書"], "systems": ["楽楽精算"] }
+        }
+      ]
+    },
+    {
+      "name": "部門長（営業部）",
+      "y_position": 400,
+      "height": 300,
+      "cards": [
+        {
+          "id": "card_3",
+          "type": "decision",
+          "content": "上長承認\n（5万超/交際費\nは部長決裁）",
+          "x": 900,
+          "y": 550,
+          "width": 200,
+          "height": 130,
+          "metadata": { "duration": "1〜2営業日", "documents": [], "systems": ["楽楽精算"] }
+        }
+      ]
+    },
+    {
+      "name": "経理部",
+      "y_position": 800,
+      "height": 300,
+      "cards": [
+        {
+          "id": "card_4",
+          "type": "decision",
+          "content": "経理チェック\n（領収書・科目・\n規定確認）",
+          "x": 1250,
+          "y": 950,
+          "width": 200,
+          "height": 130,
+          "metadata": { "duration": "10〜15分/件", "documents": ["領収書"], "systems": ["楽楽精算", "freee"] }
+        },
+        {
+          "id": "card_5",
+          "type": "task",
+          "content": "支払処理\n（振込データ作成）",
+          "x": 1600,
+          "y": 950,
+          "width": 220,
+          "height": 120,
+          "metadata": { "duration": "30分", "documents": [], "systems": ["freee", "インターネットバンキング"] }
+        },
+        {
+          "id": "card_6",
+          "type": "task",
+          "content": "仕訳・記帳",
+          "x": 1950,
+          "y": 950,
+          "width": 220,
+          "height": 120,
+          "metadata": { "duration": "5分/件", "documents": [], "systems": ["freee"] }
+        }
+      ]
+    },
+    {
+      "name": "総務部",
+      "y_position": 1200,
+      "height": 300,
+      "cards": [
+        {
+          "id": "card_7",
+          "type": "task",
+          "content": "内部監査\n（四半期）",
+          "x": 2300,
+          "y": 1350,
+          "width": 220,
+          "height": 120,
+          "metadata": { "duration": "四半期ごと2日間", "documents": ["領収書原本", "スキャンデータ"], "systems": ["文書管理システム"] }
+        }
+      ]
+    }
+  ],
+  "connectors": [
+    { "from": "card_1", "to": "card_2", "label": "" },
+    { "from": "card_2", "to": "card_3", "label": "" },
+    { "from": "card_3", "to": "card_4", "label": "承認" },
+    { "from": "card_3", "to": "card_2", "label": "差し戻し" },
+    { "from": "card_4", "to": "card_5", "label": "合格" },
+    { "from": "card_4", "to": "card_2", "label": "不備で差し戻し" },
+    { "from": "card_5", "to": "card_6", "label": "" },
+    { "from": "card_6", "to": "card_7", "label": "" }
+  ],
+  "documents": [
+    { "name": "経費精算\n申請書", "x": 850, "y": 150 },
+    { "name": "領収書", "x": 1050, "y": 150 }
+  ],
+  "systems": [
+    { "name": "Excel", "x": 1250, "y": 150 },
+    { "name": "楽楽精算", "x": 1250, "y": 550 },
+    { "name": "freee", "x": 2300, "y": 950 },
+    { "name": "インターネット\nバンキング", "x": 2500, "y": 950 },
+    { "name": "文書管理\nシステム", "x": 2650, "y": 1350 }
+  ]
+}
