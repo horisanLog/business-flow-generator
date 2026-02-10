@@ -2,13 +2,14 @@
 
 業務ヒアリング議事録から業務フロー図を自動生成し、Miroボードにエクスポートするツールです。
 
-Claude CodeのSkill（`skill.md`）として動作し、議事録の分析からMiro出力までを一貫して行います。
+Claude CodeのSkillとして動作し、議事録の分析からMiro出力までを一貫して行います。
 
 ## 構成
 
 ```
 business-flow-generator/
-├── skill.md              # Claude Code Skill定義（8品質ポイント準拠）
+├── .claude/skills/business-flow-generator/
+│   └── SKILL.md          # Claude Code Skill定義（8品質ポイント準拠）
 ├── miro-exporter.js      # Miroエクスポーター（Node.js）
 ├── miro_exporter.py      # Miroエクスポーター（Python）
 ├── flow-validator.js     # 品質検証ツール（7項目チェック）
@@ -46,9 +47,15 @@ pip install -r requirements.txt
 
 ## 使い方
 
-### ステップ1: 議事録からJSONを生成
+### ステップ1: Skillを呼び出してJSONを生成
 
-Claude Codeで `skill.md` を読み込み、議事録を分析してMiro用JSONを生成します。
+Claude Codeで直接Skillを呼び出します：
+
+```
+/business-flow-generator 議事録.md
+```
+
+または会話で依頼：
 
 ```
 この議事録から業務フローを生成してください: [議事録ファイルパス]
@@ -96,9 +103,9 @@ python miro_exporter.py output.json
 - コネクタ作成後に全シェイプをPATCHして前面に移動
 - 矢印がカードの背面に表示される
 
-## Skill定義（skill.md）
+## Skill定義
 
-`skill.md` にはClaude Codeが議事録を分析してMiro用JSONを生成するための全ルールが定義されています：
+`.claude/skills/business-flow-generator/SKILL.md` にClaude Codeが議事録を分析してMiro用JSONを生成するための全ルールが定義されています：
 
 - 議事録分析の手順（Phase 1-4）
 - 8つの品質ポイントの詳細

@@ -30,8 +30,8 @@ ENV/
 .DS_Store
 Thumbs.db
 
-# Claude Code local settings
-.claude/
+# Claude Code local settings（Skillsは除外しない）
+.claude/settings.local.json
 
 # Output Files
 output/
